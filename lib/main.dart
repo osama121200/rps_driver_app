@@ -4,8 +4,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'core/theme/app_theme.dart';
 import 'presentation/screens/auth/login_screen.dart';
 import 'presentation/state/app_bootstrapper.dart';
-import 'core/constants/app_flags.dart';
-import 'presentation/screens/demo/ui_preview_screen.dart';
 
 void main() {
   runApp(const ProviderScope(child: MyApp()));
@@ -31,7 +29,7 @@ class MyApp extends StatelessWidget {
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
-      home: AppBootstrapper(child: kUiDemoMode ? const UiPreviewScreen() : const LoginScreen()),
+      home: const AppBootstrapper(child: LoginScreen()),
     );
   }
 }

@@ -1,9 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter/foundation.dart';
 import '../../core/services/secure_storage_service.dart';
 import '../../domain/usecases/login.dart';
 import 'providers.dart';
-import '../../core/constants/app_flags.dart';
 
 class AuthState {
   final bool loading;
@@ -24,11 +22,6 @@ class AuthController extends StateNotifier<AuthState> {
   Future<bool> login({required String matricule, required String password}) async {
     state = state.copyWith(loading: true, error: null);
     try {
-      if (kUiDemoMode || kDebugMode) {
-        await storage.saveToken('dev-token');
-        state = state.copyWith(loading: false);
-        return true;
-      }
       final token = await loginUseCase(matricule: matricule, password: password);
       await storage.saveToken(token);
       state = state.copyWith(loading: false);

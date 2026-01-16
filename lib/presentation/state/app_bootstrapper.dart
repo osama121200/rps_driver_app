@@ -6,7 +6,6 @@ import '../../core/services/offline_sync_service.dart';
 import '../../data/datasources/local/offline_queue_local_data_source.dart';
 import 'providers.dart';
 import 'gps_controller.dart';
-import '../../core/constants/app_flags.dart';
 
 class AppBootstrapper extends ConsumerStatefulWidget {
   final Widget child;
@@ -22,9 +21,6 @@ class _AppBootstrapperState extends ConsumerState<AppBootstrapper> {
   @override
   void initState() {
     super.initState();
-    if (kUiDemoMode) {
-      return;
-    }
     ConnectivityService.instance.initialize();
     _sub = ConnectivityService.instance.onConnectivityChanged.listen((connected) {
       if (connected) {
